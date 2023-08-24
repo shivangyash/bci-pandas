@@ -10,7 +10,7 @@ from io import StringIO
 from dotenv import load_dotenv
 load_dotenv()
 
-# API_KEY = os.getenv('OPENAI_API_KEY')
+API_KEY = os.getenv('OPENAI_API_KEY')
 
 if 'prompt_history' not in st.session_state:
     st.session_state.prompt_history = []
@@ -28,6 +28,9 @@ if st.session_state.df is None:
 
 # with st.form("Question"):
 #     question = st.text_input("Question", value="", type="default")
+
+
+
 submitted = st.button("Submit")
 if submitted:
     with st.spinner():
@@ -44,7 +47,11 @@ if submitted:
 if st.session_state.df is not None:
     st.subheader("Current dataframe:")
     st.write(st.session_state.df)
-    st.session_state.df.to_csv('latest.csv')
+    # dff = st.session_state.df
+    if submitted:
+        st.session_state.df.to_csv('latest.csv')
+        st.download_button(label='Download Cleaned File', data=st.session_state.df.to_csv(), mime='text/csv')
+
 
 # st.subheader("Prompt history:")
 # st.write(st.session_state.prompt_history)
