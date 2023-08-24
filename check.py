@@ -10,7 +10,7 @@ from io import StringIO
 from dotenv import load_dotenv
 load_dotenv()
 
-API_KEY = os.getenv('OPENAI_API_KEY')
+# API_KEY = os.getenv('OPENAI_API_KEY')
 
 if 'prompt_history' not in st.session_state:
     st.session_state.prompt_history = []
@@ -31,7 +31,7 @@ if st.session_state.df is None:
 submitted = st.button("Submit")
 if submitted:
     with st.spinner():
-        llm = OpenAI(api_token=API_KEY)
+        llm = OpenAI(api_token=st.secrets["openai_api_key"])
         pandas_ai = PandasAI(llm, middlewares=[StreamlitMiddleware()], verbose=False)
         question = '''remove extra spaces from all the column names,  remove % from the column age of borrower, change  the date format to yyyy-mm-dd, remove the british sterling pound symbol from column amount financed, '''
         x = pandas_ai.run(st.session_state.df, prompt=question, is_conversational_answer=False)
