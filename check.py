@@ -10,7 +10,7 @@ from io import StringIO
 from dotenv import load_dotenv
 load_dotenv()
 
-API_KEY = os.getenv('OPENAI_API_KEY')
+API_KEY = st.secrets['openai_api_key']
 
 if 'prompt_history' not in st.session_state:
     st.session_state.prompt_history = []
