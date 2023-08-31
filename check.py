@@ -5,12 +5,12 @@ import pandas as pd
 from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
 from pandasai.middlewares.streamlit import StreamlitMiddleware
-import matplotlib.pyplot as plt
-from io import StringIO
+# import matplotlib.pyplot as plt
+# from io import StringIO
 from dotenv import load_dotenv
 load_dotenv()
 
-API_KEY = st.secrets['openai_api_key']
+API_KEY = st.secrets['OPENAI_API_KEY']
 
 if 'prompt_history' not in st.session_state:
     st.session_state.prompt_history = []
